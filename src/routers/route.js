@@ -44,13 +44,25 @@ router.get("/student/:id",async (req,res)=>{
 router.delete("/student/:id",async (req,res)=>{
     try{
         const _id = req.params.id;
-        const deleteStudent = Student.findByIdAndDelete(_id);
+        const deleteStudent = await Student.findByIdAndDelete(_id);
         res.status(400).send(deleteStudent)
         if(deleteStudent){
             console.log("User deleted successfully");
         }else{
             console.log("user not found")
         }
+    }catch(e){
+        res.status(400).send(e);
+    }
+})
+
+//update user
+router.patch("/student/:id",async (req,res)=>{
+    try{
+        const _id = req.params.id;
+        const updateUser = await Student.findByIdAndUpdate(_id,req.body,{new:true});
+        res.status(200).send(updateUser);
+        console.log("update user")
     }catch(e){
         res.status(400).send(e);
     }
