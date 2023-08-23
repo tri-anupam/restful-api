@@ -5,7 +5,11 @@ try{
     // mongoose.connect(process.env.MONGO_URI);
     // console.log("Database connection successful")
 
-    mongoose.connect(process.env.MONGO_URI);
+    mongoose.connect(process.env.MONGO_URI,{
+        //must add in order to not get any error masseges:
+        useUnifiedTopology:true,
+        useNewUrlParser: true
+    });
     const connection = mongoose.connection;
 
     connection.on('connected',()=>{
